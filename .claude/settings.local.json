@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(xargs ls:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(./gradlew compileDebugKotlin:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

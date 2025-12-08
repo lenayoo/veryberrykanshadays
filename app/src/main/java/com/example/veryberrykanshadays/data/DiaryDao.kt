@@ -3,7 +3,7 @@ package com.example.veryberrykanshadays.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.veryberrykanshadays.data.DiaryEntity.DiaryEntity
+import com.example.veryberrykanshadays.data.DiaryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

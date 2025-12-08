@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,33 +19,43 @@ import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
 @Composable
 fun DiaryGridScreen(
     viewModel: DiaryViewModel,
-    onClickDiary: (Int) -> Unit
+    onClickDiary: (Long) -> Unit,
+    onAddClick: () -> Unit = {}
 ) {
     val diaries by viewModel.diaries.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Kansha Diary",
-            style = MaterialTheme.typography.headlineSmall
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(onClick = onAddClick) {
+                Icon(Icons.Default.Add, contentDescription = "새 일기 추가")
+            }
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
         ) {
-            items(diaries) { diary ->
-                DiaryGridItem(
-                    diary = diary,
-                    onClick = { onClickDiary(diary.id) }
-                )
+            Text(
+                text = "Kansha Diary",
+                style = MaterialTheme.typography.headlineSmall
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(diaries) { diary ->
+                    DiaryGridItem(
+                        diary = diary,
+                        onClick = { onClickDiary(diary.id) }
+                    )
+                }
             }
         }
     }
@@ -77,21 +89,11 @@ private fun DiaryGridItem(
                 contentAlignment = androidx.compose.ui.Alignment.Center
             ) {
                 Text(
-                    text = moodToEmoji(diary.mood),
+                    text = diary.mood,
                     style = MaterialTheme.typography.headlineLarge
                 )
             }
         }
     }
 }
-
-fun moodToEmoji(mood: Int): String =
-    when (mood) {
-        1 -> "😊"
-        2 -> "🙂"
-        3 -> "😐"
-        4 -> "😟"
-        5 -> "😢"
-        else -> "😊"
-    }
 

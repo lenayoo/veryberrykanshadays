@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.veryberrykanshadays.ui.DiaryViewModel
+import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
 
 @Composable
 fun MoodSelectScreen(
     viewModel: DiaryViewModel,
     onNext: () -> Unit
 ) {
-    val uiState = viewModel.uiState
+    val currentMood = viewModel.currentMood
     val moods = listOf("😊", "🙂", "😐", "😟", "😢")
 
     Column(
@@ -35,9 +35,8 @@ fun MoodSelectScreen(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
         ) {
-            moods.forEachIndexed { index, emoji ->
-                val moodValue = index + 1
-                val selected = uiState.selectedMood == moodValue
+            moods.forEach { emoji ->
+                val selected = currentMood == emoji
 
                 Surface(
                     tonalElevation = if (selected) 4.dp else 0.dp,
@@ -46,7 +45,7 @@ fun MoodSelectScreen(
                     else MaterialTheme.colorScheme.surface,
                     modifier = Modifier
                         .size(56.dp)
-                        .clickable { viewModel.selectMood(moodValue) }
+                        .clickable { viewModel.setMood(emoji) }
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Text(text = emoji, style = MaterialTheme.typography.headlineMedium)
@@ -59,7 +58,7 @@ fun MoodSelectScreen(
 
         Button(
             onClick = onNext,
-            enabled = uiState.selectedMood != null
+            enabled = currentMood.isNotEmpty()
         ) {
             Text("다음")
         }

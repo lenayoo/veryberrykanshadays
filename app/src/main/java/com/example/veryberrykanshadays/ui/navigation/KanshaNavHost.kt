@@ -1,10 +1,12 @@
-package com.example.veryberrykanshadays.ui
+package com.example.veryberrykanshadays.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.veryberrykanshadays.ui.screens.DiaryDetailScreen
 import com.example.veryberrykanshadays.ui.screens.DiaryGridScreen
 import com.example.veryberrykanshadays.ui.screens.DiaryInputScreen
@@ -18,14 +20,14 @@ fun KanshaNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "mood_select"
+        startDestination = "grid"
     ) {
         // 1. 오늘 기분 선택 화면
         composable("mood_select") {
             MoodSelectScreen(
-                onMoodSelected = { mood ->
-                    viewModel.setMood(mood)          // ViewModel에 기분 저장
-                    navController.navigate("input")  // 감사 내용 입력 화면으로
+                viewModel = viewModel,
+                onNext = {
+                    navController.navigate("input")
                 }
             )
         }
@@ -33,21 +35,21 @@ fun KanshaNavHost(
         // 2. 감사 일기 입력 화면
         composable("input") {
             DiaryInputScreen(
-                onSave = { text ->
-                    viewModel.saveDiary(text)        // Room 저장
-                    navController.navigate("grid")   // 메인 그리드 화면으로
-                },
-                onBack = { navController.popBackStack() }
+                viewModel = viewModel,
+                onSaved = {
+                    navController.navigate("grid") {
+                        popUpTo("grid") { inclusive = true }
+                    }
+                }
             )
         }
 
         // 3. 메인 그리드 화면
         composable("grid") {
             DiaryGridScreen(
-                diaries = viewModel.diaries,
-                onDiaryClick = { diaryId ->
-                    viewModel.selectDiary(diaryId)
-                    navController.navigate("detail")
+                viewModel = viewModel,
+                onClickDiary = { diaryId ->
+                    navController.navigate("detail/$diaryId")
                 },
                 onAddClick = {
                     navController.navigate("mood_select")
@@ -56,9 +58,14 @@ fun KanshaNavHost(
         }
 
         // 4. 상세 화면
-        composable("detail") {
+        composable(
+            route = "detail/{diaryId}",
+            arguments = listOf(navArgument("diaryId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val diaryId = backStackEntry.arguments?.getLong("diaryId") ?: 0L
             DiaryDetailScreen(
-                selectedDiary = viewModel.selectedDiary,
+                id = diaryId,
+                viewModel = viewModel,
                 onBack = { navController.popBackStack() }
             )
         }

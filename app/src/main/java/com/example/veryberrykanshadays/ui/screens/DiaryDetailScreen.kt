@@ -11,15 +11,15 @@ import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
 
 @Composable
 fun DiaryDetailScreen(
-    id: Int,
+    id: Long,
     viewModel: DiaryViewModel,
     onBack: () -> Unit
 ) {
-    var diary by remember { mutableStateOf<DiaryEntity?>(null) }
-
     LaunchedEffect(id) {
-        diary = viewModel.getDiary(id)
+        viewModel.selectDiary(id)
     }
+
+    val diary = viewModel.selectedDiary
 
     Scaffold(
         topBar = {
@@ -57,7 +57,7 @@ fun DiaryDetailScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = moodToEmoji(item.mood),
+                    text = item.mood,
                     style = MaterialTheme.typography.displayMedium
                 )
                 Spacer(modifier = Modifier.height(24.dp))
