@@ -4,7 +4,8 @@
       "Bash(grep:*)",
       "Bash(xargs ls:*)",
       "Bash(./gradlew build:*)",
-      "Bash(./gradlew compileDebugKotlin:*)"
+      "Bash(./gradlew compileDebugKotlin:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

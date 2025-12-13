@@ -6,6 +6,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
 
@@ -15,6 +17,11 @@ fun DiaryInputScreen(
     onSaved: () -> Unit
 ) {
     var content by remember { mutableStateOf("") }
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     Column(
         modifier = Modifier
@@ -35,7 +42,8 @@ fun DiaryInputScreen(
             placeholder = { Text("예: 오늘 커피가 정말 맛있었어 ☕") },
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f, fill = false),
+                .weight(1f, fill = false)
+                .focusRequester(focusRequester),
             minLines = 3
         )
 

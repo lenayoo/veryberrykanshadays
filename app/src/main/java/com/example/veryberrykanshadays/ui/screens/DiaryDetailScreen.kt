@@ -21,24 +21,37 @@ fun DiaryDetailScreen(
 
     val diary = viewModel.selectedDiary
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("감사일기 상세") },
-                navigationIcon = {
-                    TextButton(onClick = onBack) {
-                        Text("←")
-                    }
-                })
+    Column(modifier = Modifier.fillMaxSize()) {
+        // 커스텀 상단바
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surface,
+            shadowElevation = 4.dp
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(onClick = onBack) {
+                    Text("←", style = MaterialTheme.typography.titleLarge)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "감사일기 상세",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
         }
-    ) { innerPadding ->
+
         val item = diary
 
         if (item == null) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -47,7 +60,6 @@ fun DiaryDetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
