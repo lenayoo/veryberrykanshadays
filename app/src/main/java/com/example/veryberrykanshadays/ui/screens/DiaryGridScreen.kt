@@ -26,8 +26,12 @@ fun DiaryGridScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddClick) {
-                Icon(Icons.Default.Add, contentDescription = "새 일기 추가")
+            FloatingActionButton(
+                onClick = onAddClick,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "新しい日記を追加")
             }
         }
     ) { paddingValues ->
@@ -35,20 +39,21 @@ fun DiaryGridScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp)
+                .padding(20.dp)
         ) {
             Text(
-                text = "Kansha Diary",
-                style = MaterialTheme.typography.headlineSmall
+                text = "感謝日記",
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.primary
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(diaries) { diary ->
                     DiaryGridItem(
@@ -66,22 +71,29 @@ private fun DiaryGridItem(
     diary: DiaryEntity,
     onClick: () -> Unit
 ) {
-    Surface(
+    Card(
         modifier = Modifier
             .aspectRatio(1f)
             .clickable { onClick() },
-        shape = MaterialTheme.shapes.medium,
-        tonalElevation = 2.dp
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp,
+            pressedElevation = 8.dp
+        )
     ) {
         Column(
             modifier = Modifier
-                .padding(12.dp)
+                .padding(16.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = diary.date,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Box(
@@ -90,7 +102,7 @@ private fun DiaryGridItem(
             ) {
                 Text(
                     text = diary.mood,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.displayLarge
                 )
             }
         }

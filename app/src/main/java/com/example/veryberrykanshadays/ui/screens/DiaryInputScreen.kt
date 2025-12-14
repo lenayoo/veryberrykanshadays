@@ -2,14 +2,19 @@ package com.example.veryberrykanshadays.ui.screens
 
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun DiaryInputScreen(
@@ -17,11 +22,6 @@ fun DiaryInputScreen(
     onSaved: () -> Unit
 ) {
     var content by remember { mutableStateOf("") }
-    val focusRequester = remember { FocusRequester() }
-
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-    }
 
     Column(
         modifier = Modifier
@@ -30,33 +30,40 @@ fun DiaryInputScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "오늘 감사한 일은 무엇인가요?",
-            style = MaterialTheme.typography.headlineSmall
+            text = "今日感謝したことは何ですか？",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
-        TextField(
+        OutlinedTextField(
             value = content,
             onValueChange = { content = it },
-            placeholder = { Text("예: 오늘 커피가 정말 맛있었어 ☕") },
+            placeholder = { Text("例：出社前に走ることができた🏃‍♀️") },
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f, fill = false)
-                .focusRequester(focusRequester),
-            minLines = 3
+                .heightIn(min = 200.dp),
+            shape = MaterialTheme.shapes.medium
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Button(
             onClick = {
                 viewModel.saveDiary(content)
                 onSaved()
             },
-            enabled = content.isNotBlank()
+            enabled = content.isNotBlank(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = MaterialTheme.shapes.large
         ) {
-            Text("저장하기")
+            Text(
+                text = "保存",
+                style = MaterialTheme.typography.titleMedium
+            )
         }
     }
 }

@@ -11,6 +11,7 @@ import com.example.veryberrykanshadays.ui.screens.DiaryDetailScreen
 import com.example.veryberrykanshadays.ui.screens.DiaryGridScreen
 import com.example.veryberrykanshadays.ui.screens.DiaryInputScreen
 import com.example.veryberrykanshadays.ui.screens.MoodSelectScreen
+import com.example.veryberrykanshadays.ui.screens.WelcomeScreen
 import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
 
 @Composable
@@ -20,8 +21,19 @@ fun KanshaNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "grid"
+        startDestination = "welcome"
     ) {
+        // 0. ウェルカム画面
+        composable("welcome") {
+            WelcomeScreen(
+                onStart = {
+                    navController.navigate("grid") {
+                        popUpTo("welcome") { inclusive = true }
+                    }
+                }
+            )
+        }
+
         // 1. 오늘 기분 선택 화면
         composable("mood_select") {
             MoodSelectScreen(

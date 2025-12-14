@@ -22,25 +22,30 @@ fun DiaryDetailScreen(
     val diary = viewModel.selectedDiary
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // 커스텀 상단바
+        // カスタムトップバー
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surface,
-            shadowElevation = 4.dp
+            color = MaterialTheme.colorScheme.primaryContainer,
+            shadowElevation = 2.dp
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 12.dp),
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(onClick = onBack) {
-                    Text("←", style = MaterialTheme.typography.titleLarge)
+                IconButton(onClick = onBack) {
+                    Text(
+                        "←",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "감사일기 상세",
-                    style = MaterialTheme.typography.titleLarge
+                    text = "感謝日記詳細",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         }

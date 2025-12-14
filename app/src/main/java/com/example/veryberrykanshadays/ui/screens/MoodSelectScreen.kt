@@ -16,20 +16,22 @@ fun MoodSelectScreen(
     onNext: () -> Unit
 ) {
     val currentMood = viewModel.currentMood
-    val moods = listOf("😊", "🙂", "😐", "😟", "😢")
+    val moods = listOf("🥰", "🥳", "😆", "🤯", "🫨")
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "오늘의 기분을 알려주세요?",
-            style = MaterialTheme.typography.headlineSmall
+            text = "今日の気分を教えてください",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
@@ -39,28 +41,38 @@ fun MoodSelectScreen(
                 val selected = currentMood == emoji
 
                 Surface(
-                    tonalElevation = if (selected) 4.dp else 0.dp,
-                    shape = MaterialTheme.shapes.medium,
+                    tonalElevation = if (selected) 8.dp else 2.dp,
+                    shape = MaterialTheme.shapes.large,
                     color = if (selected) MaterialTheme.colorScheme.primaryContainer
-                    else MaterialTheme.colorScheme.surface,
+                    else MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier
-                        .size(56.dp)
+                        .size(64.dp)
                         .clickable { viewModel.setMood(emoji) }
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                        Text(text = emoji, style = MaterialTheme.typography.headlineMedium)
+                        Text(
+                            text = emoji,
+                            style = MaterialTheme.typography.displaySmall
+                        )
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
         Button(
             onClick = onNext,
-            enabled = currentMood.isNotEmpty()
+            enabled = currentMood.isNotEmpty(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = MaterialTheme.shapes.large
         ) {
-            Text("다음")
+            Text(
+                text = "次へ",
+                style = MaterialTheme.typography.titleMedium
+            )
         }
     }
 }
