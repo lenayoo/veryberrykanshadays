@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.data
+package io.github.lenayoo.veryberrykanshadays.data
 
 import kotlinx.coroutines.flow.Flow
 

@@ -1,5 +1,5 @@
 
-package com.example.veryberrykanshadays
+package io.github.lenayoo.veryberrykanshadays
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -7,11 +7,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
-import com.example.veryberrykanshadays.data.DiaryDatabase
-import com.example.veryberrykanshadays.data.DiaryRepository
-import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
-import com.example.veryberrykanshadays.ui.navigation.KanshaNavHost
-import com.example.veryberrykanshadays.ui.theme.VeryberrykanshadaysTheme
+import io.github.lenayoo.veryberrykanshadays.data.DiaryDatabase
+import io.github.lenayoo.veryberrykanshadays.data.DiaryRepository
+import io.github.lenayoo.veryberrykanshadays.ui.viewmodel.DiaryViewModel
+import io.github.lenayoo.veryberrykanshadays.ui.navigation.KanshaNavHost
+import io.github.lenayoo.veryberrykanshadays.ui.theme.VeryberrykanshadaysTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

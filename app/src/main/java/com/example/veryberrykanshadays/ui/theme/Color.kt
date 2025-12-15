@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.ui.theme
+package io.github.lenayoo.veryberrykanshadays.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

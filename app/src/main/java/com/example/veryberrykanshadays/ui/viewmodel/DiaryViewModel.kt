@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.ui.viewmodel
+package io.github.lenayoo.veryberrykanshadays.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.veryberrykanshadays.data.DiaryEntity
-import com.example.veryberrykanshadays.data.DiaryRepository
+import io.github.lenayoo.veryberrykanshadays.data.DiaryEntity
+import io.github.lenayoo.veryberrykanshadays.data.DiaryRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

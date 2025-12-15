@@ -5,7 +5,20 @@
       "Bash(xargs ls:*)",
       "Bash(./gradlew build:*)",
       "Bash(./gradlew compileDebugKotlin:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(keytool:*)",
+      "Bash(./gradlew bundleRelease:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(./gradlew:*)",
+      "Bash(find:*)",
+      "Bash(adb shell pm list packages:*)",
+      "Bash(adb uninstall:*)",
+      "Bash(adb shell am:*)",
+      "Bash(adb logcat:*)",
+      "Bash(adb shell:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)"
     ],
     "deny": [],
     "ask": []

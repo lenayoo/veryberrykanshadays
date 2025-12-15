@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.ui.navigation
+package io.github.lenayoo.veryberrykanshadays.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -7,12 +7,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.veryberrykanshadays.ui.screens.DiaryDetailScreen
-import com.example.veryberrykanshadays.ui.screens.DiaryGridScreen
-import com.example.veryberrykanshadays.ui.screens.DiaryInputScreen
-import com.example.veryberrykanshadays.ui.screens.MoodSelectScreen
-import com.example.veryberrykanshadays.ui.screens.WelcomeScreen
-import com.example.veryberrykanshadays.ui.viewmodel.DiaryViewModel
+import io.github.lenayoo.veryberrykanshadays.ui.screens.DiaryDetailScreen
+import io.github.lenayoo.veryberrykanshadays.ui.screens.DiaryGridScreen
+import io.github.lenayoo.veryberrykanshadays.ui.screens.DiaryInputScreen
+import io.github.lenayoo.veryberrykanshadays.ui.screens.MoodSelectScreen
+import io.github.lenayoo.veryberrykanshadays.ui.screens.WelcomeScreen
+import io.github.lenayoo.veryberrykanshadays.ui.viewmodel.DiaryViewModel
 
 @Composable
 fun KanshaNavHost(
@@ -40,6 +40,11 @@ fun KanshaNavHost(
                 viewModel = viewModel,
                 onNext = {
                     navController.navigate("input")
+                },
+                onHome = {
+                    navController.navigate("grid") {
+                        popUpTo("grid") { inclusive = true }
+                    }
                 }
             )
         }
@@ -49,6 +54,11 @@ fun KanshaNavHost(
             DiaryInputScreen(
                 viewModel = viewModel,
                 onSaved = {
+                    navController.navigate("grid") {
+                        popUpTo("grid") { inclusive = true }
+                    }
+                },
+                onHome = {
                     navController.navigate("grid") {
                         popUpTo("grid") { inclusive = true }
                     }

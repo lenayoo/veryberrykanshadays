@@ -1,9 +1,9 @@
-package com.example.veryberrykanshadays.data
+package io.github.lenayoo.veryberrykanshadays.data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.veryberrykanshadays.data.DiaryEntity
+import io.github.lenayoo.veryberrykanshadays.data.DiaryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

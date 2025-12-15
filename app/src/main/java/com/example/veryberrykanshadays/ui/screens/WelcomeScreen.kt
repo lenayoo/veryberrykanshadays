@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.ui.screens
+package io.github.lenayoo.veryberrykanshadays.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

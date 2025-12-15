@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.data
+package io.github.lenayoo.veryberrykanshadays.data
 
 import android.content.Context
 import androidx.room.Database

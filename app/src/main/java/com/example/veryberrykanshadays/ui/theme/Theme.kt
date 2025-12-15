@@ -1,4 +1,4 @@
-package com.example.veryberrykanshadays.ui.theme
+package io.github.lenayoo.veryberrykanshadays.ui.theme
 
 import android.app.Activity
 import android.os.Build
